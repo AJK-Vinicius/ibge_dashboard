@@ -22,21 +22,21 @@ export function HomePage() {
 
   return (
     <div className="flex-1 overflow-auto">
-      <div className="p-8">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-primary mb-2">Dados IBGE</h1>
-          <p className="text-muted-foreground">
+      <div className="p-4 sm:p-6 lg:p-8">
+        <header className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary mb-2">Dados IBGE</h1>
+          <p className="text-muted-foreground text-sm sm:text-base">
             Dashboard com dados econômicos do Instituto Brasileiro de Geografia e Estatística
           </p>
-        </div>
+        </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <section className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8" aria-label="Estatísticas principais">
           <StatCard
             title="IPCA - Inflação"
             description="Índice de preços ao consumidor"
             value={ipcaCount > 0 ? `${ipcaCount} registros` : "Sem dados"}
             subtitle="Disponíveis"
-            icon={<TrendingUp className="w-5 h-5 text-primary" />}
+            icon={<TrendingUp className="w-5 h-5 text-primary" aria-hidden="true" />}
             onClick={goToIPCA}
           />
 
@@ -45,10 +45,10 @@ export function HomePage() {
             description="Principais métricas econômicas"
             value={indicatorsCount}
             subtitle="Indicadores"
-            icon={<BarChart3 className="w-5 h-5 text-primary" />}
+            icon={<BarChart3 className="w-5 h-5 text-primary" aria-hidden="true" />}
             onClick={goToIndicators}
           />
-        </div>
+        </section>
       </div>
     </div>
   )

@@ -24,9 +24,11 @@ export function Dashboard() {
   }
 
   return (
-    <div className="flex h-screen bg-background">
+    <div className="flex flex-col lg:flex-row h-screen bg-background">
       <Sidebar />
-      {renderPage()}
+      <main className="flex-1 overflow-auto" role="main">
+        {renderPage()}
+      </main>
     </div>
   )
 }

@@ -16,10 +16,10 @@ export function Sidebar() {
   const { navigateTo } = useNavigation()
 
   return (
-    <div className="w-64 bg-sidebar text-sidebar-foreground flex flex-col">
+    <aside className="w-full lg:w-64 bg-sidebar text-sidebar-foreground flex flex-col shrink-0" role="navigation" aria-label="Menu principal">
       <div className="p-6 border-b border-sidebar-border">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-sidebar-primary rounded-lg flex items-center justify-center">
+          <div className="w-8 h-8 bg-sidebar-primary rounded-lg flex items-center justify-center" aria-hidden="true">
             <BarChart3 className="w-5 h-5 text-sidebar-primary-foreground" />
           </div>
           <div>
@@ -29,27 +29,29 @@ export function Sidebar() {
         </div>
       </div>
       
-      <nav className="flex-1 p-4">
-        <ul className="space-y-2">
+      <nav className="flex-1 p-4" role="navigation" aria-label="Navegação principal">
+        <ul className="space-y-2" role="list">
           {menuItems.map((item) => {
             const Icon = item.icon
             const isActive = state.currentPage === item.id
             
             return (
-              <li key={item.id}>
+              <li key={item.id} role="listitem">
                 <button
                   onClick={() => navigateTo(item.id)}
                   className={cn(
-                    "w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left transition-colors",
+                    "w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left transition-colors focus:outline-none focus:ring-2 focus:ring-sidebar-primary focus:ring-offset-2",
                     isActive
                       ? "bg-sidebar-accent text-sidebar-accent-foreground"
                       : "hover:bg-sidebar-accent/50"
                   )}
+                  aria-current={isActive ? "page" : undefined}
+                  aria-label={`Navegar para ${item.label}`}
                 >
-                  <Icon className="w-5 h-5" />
+                  <Icon className="w-5 h-5" aria-hidden="true" />
                   <span>{item.label}</span>
                   {isActive && (
-                    <div className="ml-auto w-2 h-2 bg-sidebar-primary rounded-full" />
+                    <div className="ml-auto w-2 h-2 bg-sidebar-primary rounded-full" aria-hidden="true" />
                   )}
                 </button>
               </li>
@@ -57,6 +59,6 @@ export function Sidebar() {
           })}
         </ul>
       </nav>
-    </div>
+    </aside>
   )
 }

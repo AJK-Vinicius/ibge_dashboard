@@ -31,16 +31,16 @@ export function IPCAPage() {
 
   return (
     <div className="flex-1 overflow-auto">
-      <div className="p-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">IPCA - Índice de Preços ao Consumidor Amplo</h1>
-          <p className="text-muted-foreground">Dados detalhados de inflação por grupo de produtos e serviços - Ano 2019</p>
-          <div className="flex items-center gap-2 mt-2">
+      <div className="p-4 sm:p-6 lg:p-8">
+        <header className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2">IPCA - Índice de Preços ao Consumidor Amplo</h1>
+          <p className="text-muted-foreground text-sm sm:text-base">Dados detalhados de inflação por grupo de produtos e serviços - Ano 2019</p>
+          <div className="flex flex-wrap items-center gap-2 mt-2">
             <Badge variant="secondary">Dados SIDRA/IBGE</Badge>
             <Badge variant="outline">{filteredData.length} registros carregados</Badge>
           </div>
           
-          <div className="mt-6">
+          <div className="mt-4 sm:mt-6">
             <IPCAFilters
               selectedMonth={selectedMonth}
               selectedGroup={selectedGroup}
@@ -48,17 +48,17 @@ export function IPCAPage() {
               onGroupChange={setGroup}
             />
           </div>
-        </div>
+        </header>
 
         {filteredData.length > 0 && (
           <>
-            <div className="mb-6">
-              <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
-                <TrendingUp className="w-6 h-6" />
+            <section className="mb-6" aria-label="IPCA por grupos de produtos">
+              <h2 className="text-xl sm:text-2xl font-semibold mb-4 flex flex-wrap items-center gap-2">
+                <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6" aria-hidden="true" />
                 IPCA por Grupos de Produtos
                 <FilterBadges filters={activeFilters} />
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                 {groupData
                   .filter(item => {
                     if (selectedGroup !== 'all') {
@@ -81,21 +81,7 @@ export function IPCAPage() {
                     />
                   ))}
               </div>
-            </div>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Dados Detalhados</CardTitle>
-                <CardDescription>
-                  Tabela com dados do IPCA por grupos de produtos
-                  {selectedMonth}
-                  {selectedGroup !== 'all' && ` - ${selectedGroup}`}
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <DataTable data={filteredData} />
-              </CardContent>
-            </Card>
+            </section>
           </>
         )}
       </div>
